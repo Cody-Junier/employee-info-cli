@@ -1,0 +1,5 @@
+const Employee = require('../lib/employee')
+
+test(Employee){
+
+};
