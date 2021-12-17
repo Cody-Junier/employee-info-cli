@@ -2,83 +2,239 @@ const inquirer = require('inquirer')
 const Manager= require('../lib/manager')
 const Engineer= require('../lib/engineer')
 const Intern= require('../lib/intern')
-const employeeInfoTemplate = require('./employeeInfoTemplate')
+const genHtml = require('./employeeInfoTemplate')
+const fs= require('fs')
+const path = require('path')
 
-const getEmployeeInfo = () => {
+let workspace = []
+
+const addEmployees = ()=>{
+    inquirer.prompt([{
+        type:"list",
+        message:"Would you like to add more Employees?",
+        name:"choice",
+        choices:['Add Engineer', 'Add Intern', 'Finish'],
+        default: 'Finish'
+    }])
+    .then(({choice})=>{
+        console.log(choice)
+        switch(choice){
+            case'Add Engineer':
+                addEngineer()
+                break;
+             case'Add Intern':
+                addIntern()
+                break;
+            case 'Finish':
+                console.log('Finished! Generating Page now...')
+                generateIt(workspace)
+                break;
+            }}
+
+    )
+}
+
+const addEngineer = ()=>{
     inquirer
         .prompt([
         {
             type:"input",
-            message:"What is your Managers' name?",
-            name: 'manager',
-            validate: managerInput =>{
-                if (managerInput){
+            message:"What is your Engineers' name?",
+            name: "name",
+            validate: engineerInput =>{
+                if (engineerInput){
                     return true;
                 }else{
-                    console.log("Please Enter Your Managers' Info")
+                    console.log("Please Enter Your Engineers' Info")
                     return false;
                 }
             }
         },
         {
             type:"input",
-            message:"Please enter the ID of the Manager.",
+            message:"Please enter the ID of the engineer.",
             name:"id",
-            validate: managerInput =>{
-                if (managerInput){
+            validate: engineerInput =>{
+                if (engineerInput){
                     return true;
                 }else{
-                    console.log("Please Enter Your Managers' Info")
+                    console.log("Please Enter Your Engineers' Info")
                     return false
                 }
             }
         },
         {
             type:"input",
-            message:"Please enter the email address of the Manager.",
+            message:"Please enter the email address of the engineer.",
             name:"email",
-            validate: managerInput =>{
-                if (managerInput){
+            validate: engineerInput =>{
+                if (engineerInput){
                     return true;
                 }else{
-                    console.log("Please Enter Your Managers' Info")
+                    console.log("Please Enter Your Engineers' Info")
                     return false
                 }
             }
         },
         {
             type:"input",
-            message:"Please enter the Office number of the manager.",
-            name:"office",
-            validate: managerInput =>{
-                if (managerInput){
+            message:"Please enter the GitHub of the engineer.",
+            name:"github",
+            validate: engineerInput =>{
+                if (engineerInput){
                     return true;
                 }else{
-                    console.log("Please Enter Your Managers' Info")
+                    console.log("Please Enter Your Engineers' Info")
                     return false
                 }
             }
-        },
-        // Make below choices part of another function?
-        {
-            type:"list",
-            message:"Would you like to add more Employees?",
-            name:"employees?",
-            choices:['Add Engineer', 'Add Intern', 'Finish'],
-            default: 'Finish'
         }])
-        .then(({choice})=>{
-            if(choice ==='Add Engineer'){
-                return addEngineer()
-            } else if(choice === 'Add Intern'){
-                return addIntern()
-            }else{
-                console.log('Finished! Generating Page now...')
-                return 
-            }
-
+        .then(answers =>{
+            const{name, id, email, github}=answers
+            var engineer = new Engineer(name,id,email,github)
+            workspace.push(engineer)
+            console.log(workspace)
+            addEmployees()
+            
         })
 }
-// const addEngineer
-// const addIntern
-module.exports = getEmployeeInfo
+
+const addIntern = ()=>{
+    inquirer
+        .prompt([
+        {
+            type:"input",
+            message:"What is your Interns' name?",
+            name: "name",
+            validate: internInput =>{
+                if (internInput){
+                    return true;
+                }else{
+                    console.log("Please Enter Your Interns' Info")
+                    return false;
+                }
+            }
+        },
+        {
+            type:"input",
+            message:"Please enter the ID of the intern.",
+            name:"id",
+            validate: internInput =>{
+                if (internInput){
+                    return true;
+                }else{
+                    console.log("Please Enter Your Interns' Info")
+                    return false
+                }
+            }
+        },
+        {
+            type:"input",
+            message:"Please enter the email address of the intern.",
+            name:"email",
+            validate: internInput =>{
+                if (internInput){
+                    return true;
+                }else{
+                    console.log("Please Enter Your Interns' Info")
+                    return false
+                }
+            }
+        },
+        {
+            type:"input",
+            message:"Please enter the school of the intern.",
+            name:"school",
+            validate: internInput =>{
+                if (internInput){
+                    return true;
+                }else{
+                    console.log("Please Enter Your Interns' Info")
+                    return false
+                }
+            }
+        }])
+        .then(answers =>{
+            const{name, id, email, school}=answers
+            var intern = new Intern(name,id,email,school)
+            workspace.push(intern)
+            console.log(workspace)
+            addEmployees()
+            
+        })
+}
+
+const addManager = () => {
+inquirer
+    .prompt([
+    {
+        type:"input",
+        message:"What is your Managers' name?",
+        name: "name",
+        validate: managerInput =>{
+            if (managerInput){
+                return true;
+            }else{
+                console.log("Please Enter Your Managers' Info")
+                return false;
+            }
+        }
+    },
+    {
+        type:"input",
+        message:"Please enter the ID of the Manager.",
+        name:"id",
+        validate: managerInput =>{
+            if (managerInput){
+                return true;
+            }else{
+                console.log("Please Enter Your Managers' Info")
+                return false
+            }
+        }
+    },
+    {
+        type:"input",
+        message:"Please enter the email address of the Manager.",
+        name:"email",
+        validate: managerInput =>{
+            if (managerInput){
+                return true;
+            }else{
+                console.log("Please Enter Your Managers' Info")
+                return false
+            }
+        }
+    },
+    {
+        type:"input",
+        message:"Please enter the Office number of the manager.",
+        name:"office",
+        validate: managerInput =>{
+            if (managerInput){
+                return true;
+            }else{
+                console.log("Please Enter Your Managers' Info")
+                return false
+            }
+        }
+    }])
+    .then(answers =>{
+        const{name, id, email, office}=answers
+        var manager = new Manager(name,id,email,office)
+        workspace.push(manager)
+        console.log(workspace)
+        addEmployees()
+        
+    })
+    
+    
+}
+
+const generateIt= (data)=>{
+    console.log(genHtml(data))
+    fs.writeFile('workspace.html', genHtml(data))
+
+}
+
+module.exports = addManager
