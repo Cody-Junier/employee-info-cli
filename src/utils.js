@@ -233,8 +233,11 @@ inquirer
 
 const generateIt= (data)=>{
     console.log(genHtml(data))
-    fs.writeFile('workspace.html', genHtml(data))
+    fs.writeFileSync(`${path.join(process.cwd())}/dist/workspace.html`, genHtml(data), err => {
+		if (err) console.log(err)
+	})
+    // fs.writeFile('/dist/workspace.html', genHtml(data))
 
 }
 
-module.exports = addManager
+module.exports = addManager, generateIt

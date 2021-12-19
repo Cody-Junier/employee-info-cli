@@ -1,8 +1,8 @@
 const fs = require('fs')
-const addManager = require('./src/utils')
+const generateIt = require('./src/utils')
 
 const init = () => {
-    addManager()
+    generateIt()
     
 }
 
