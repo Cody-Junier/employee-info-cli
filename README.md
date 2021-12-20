@@ -5,7 +5,7 @@ The purpose of this app is to generate a webpage given user input so that employ
 ![screenshot of CLI](assets/Screenshot.png)
 
 Please view ReadMe4U.md for more information + instructions for use.
-Sample Video: https://watch.screencastify.com/v/kAI3dHx3157FqHXY8nGj
+Sample Video: https://watch.screencastify.com/v/uOHfSzwVzhQJDQpTxlHg
 
 
 Copyright <2021> <Cody Junier>

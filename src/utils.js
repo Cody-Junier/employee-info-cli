@@ -7,7 +7,7 @@ const fs= require('fs')
 const path = require('path')
 
 let workspace = []
-
+// Template to add employee or finish program, generating page
 const addEmployees = ()=>{
     inquirer.prompt([{
         type:"list",
@@ -33,7 +33,7 @@ const addEmployees = ()=>{
 
     )
 }
-
+// engineer template
 const addEngineer = ()=>{
     inquirer
         .prompt([
@@ -98,7 +98,7 @@ const addEngineer = ()=>{
             
         })
 }
-
+// intern template
 const addIntern = ()=>{
     inquirer
         .prompt([
@@ -163,7 +163,7 @@ const addIntern = ()=>{
             
         })
 }
-
+// manager template, to be called first
 const addManager = () => {
 inquirer
     .prompt([
@@ -230,13 +230,12 @@ inquirer
     
     
 }
-
+// funtion to take userinput to generate HTML page
 const generateIt= (data)=>{
     console.log(genHtml(data))
     fs.writeFileSync(`${path.join(process.cwd())}/dist/workspace.html`, genHtml(data), err => {
 		if (err) console.log(err)
 	})
-    // fs.writeFile('/dist/workspace.html', genHtml(data))
 
 }
 

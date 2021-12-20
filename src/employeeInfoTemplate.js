@@ -1,3 +1,4 @@
+// template for manager
 const managerTemplate= (manager) =>{
     return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
@@ -10,6 +11,7 @@ const managerTemplate= (manager) =>{
         </div>
   </div>`
 }
+// reusable template for engineer
 const engineerTemplate= (engineer) =>{
     return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
@@ -22,6 +24,7 @@ const engineerTemplate= (engineer) =>{
     </div>
   </div>`
 }
+// reusable template for intern
 const internTemplate= (intern) =>{
     return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
@@ -36,6 +39,7 @@ const internTemplate= (intern) =>{
 }
 
 
+// generate HTML adding in the manager, engineer, and intern templates from above
 const genHtml =(workspace) =>{
     return `<!DOCTYPE html>
 <html lang="en">
@@ -51,6 +55,7 @@ const genHtml =(workspace) =>{
 <h1 class="text-center bg-black text-white p-5">Workspace Info</h1>
 </header>
 <main class="d-flex justify-content-center flex-wrap">
+
     ${workspace.filter(employee =>{
         if(employee.getRole()=== "Manager"){
             return employee
