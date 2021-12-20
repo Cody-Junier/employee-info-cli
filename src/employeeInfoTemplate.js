@@ -1,5 +1,5 @@
 const managerTemplate= (manager) =>{
-    return `<div class="card" style="width: 18rem;">
+    return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
       <h5 class="card-title bg-danger p-2">Manager ${manager.name}</h5>
       <ul class="card-text">
@@ -11,7 +11,7 @@ const managerTemplate= (manager) =>{
   </div>`
 }
 const engineerTemplate= (engineer) =>{
-    return `<div class="card" style="width: 18rem;">
+    return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
       <h5 class="card-title bg-info p-2">Engineer ${engineer.name}</h5>
       <ul class="card-text">
@@ -23,7 +23,7 @@ const engineerTemplate= (engineer) =>{
   </div>`
 }
 const internTemplate= (intern) =>{
-    return `<div class="card" style="width: 18rem;">
+    return `<div class="card m-2" style="width: 18rem;">
     <div class="card-body p-0">
       <h5 class="card-title bg-warning p-2">Intern: ${intern.name}</h5>
       <ul class="card-text">
@@ -50,7 +50,7 @@ const genHtml =(workspace) =>{
 <header>
 <h1 class="text-center bg-black text-white p-5">Workspace Info</h1>
 </header>
-<main class="d-flex justify-content-center">
+<main class="d-flex justify-content-center flex-wrap">
     ${workspace.filter(employee =>{
         if(employee.getRole()=== "Manager"){
             return employee
